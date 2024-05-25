@@ -91,7 +91,7 @@ def print_results(results_dic, results_stats_dic, model,
         #           by results_stats_dic[key]
         #
         if key[0] == "p":
-            print(key, ": ", round(results_stats_dic[key],1),"%")
+            print("{}: {}%".format(key, round(results_stats_dic[key],2)))
 
 
     # IF print_incorrect_dogs == True AND there were images incorrectly
