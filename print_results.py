@@ -90,10 +90,11 @@ def print_results(results_dic, results_stats_dic, model,
         #           both the key and the value. Remember the value is accessed
         #           by results_stats_dic[key]
         #
-        print("{}: {}".format(key, results_stats_dic[key]))
+        if key[0] == "p":
+            print(key, ": ", round(results_stats_dic[key],1),"%")
 
 
-        # IF print_incorrect_dogs == True AND there were images incorrectly
+    # IF print_incorrect_dogs == True AND there were images incorrectly
     # classified as dogs or vice versa - print out these cases
     if (print_incorrect_dogs and
             ( (results_stats_dic['n_correct_dogs'] + results_stats_dic['n_correct_notdogs'])
@@ -122,7 +123,7 @@ def print_results(results_dic, results_stats_dic, model,
             #
             # Pet Image Label is a Dog - Classified as NOT-A-DOG -OR-
             # Pet Image Label is NOT-a-Dog - Classified as a-DOG
-            if results_dic[key][3] != results_dic[key][4]:
+            if sum(results_dic[key][3:]) == 1:
                 print("Real: {:>26}   Classifier: {:>30}".format(results_dic[key][0],
                                                                  results_dic[key][1]))
 
@@ -137,7 +138,7 @@ def print_results(results_dic, results_stats_dic, model,
         for key in results_dic:
 
             # Pet Image Label is-a-Dog, classified as-a-dog but is WRONG breed
-            if ( sum(results_dic[key][3:]) == 2 and
-                    results_dic[key][2] == 0 ):
+            if (sum(results_dic[key][3:]) == 2 and
+                    results_dic[key][2] == 0):
                 print("Real: {:>26}   Classifier: {:>30}".format(results_dic[key][0],
                                                                  results_dic[key][1]))
